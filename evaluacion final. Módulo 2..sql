@@ -114,7 +114,21 @@ INNER JOIN inventory
 ON rental.inventory_id = inventory.inventory_id
 INNER JOIN film 
 ON inventory.film_id = film.film_id
-GROUP BY customer.customer_id, customer.first_name, customer.last_name 
+GROUP BY customer.customer_id, customer.first_name, customer.last_name
+
+11. Encuentra la cantidad total de películas alquiladas por categoría y muestra el nombre de la categoría junto con el recuento de alquileres.
+SELECT category.name AS categoria, COUNT(rental.rental_id) AS total_alquileres
+FROM rental
+INNER JOIN  inventory 
+ON rental.inventory_id = inventory.inventory_id
+INNER JOIN film 
+ON inventory.film_id = film.film_id
+INNER JOIN film_category
+ON film.film_id = film_category.film_id
+INNER JOIN category 
+ON film_category.category_id = category.category_id
+GROUP BY category.name;
+
 
 12.  Encuentra el promedio de duración de las películas para cada clasificación de la tabla film y muestra la clasificación junto con el promedio de duración.   
 
